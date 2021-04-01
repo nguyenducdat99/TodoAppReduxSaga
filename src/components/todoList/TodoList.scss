@@ -1,0 +1,58 @@
+.todo-list {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 0.25rem;
+    border: 1px solid #d3d3d3;
+
+    input {
+        margin-bottom: 15px;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 16px;
+        color: gray;
+        border: none;
+        border-bottom: 1px solid gray;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    table {
+        width: 100%;
+         td,
+         th {
+            text-align: center;
+            padding: 0.375rem 0.75rem;
+         }
+    }
+
+    &__status-enable,
+    &__status-disable {
+        padding: 0.1em;
+        background-color: green;
+        border-radius: 0.25rem;
+        color: white;
+        font-size: 10px;
+    }
+    
+    &__status-disable {
+        background-color: #dc3545;
+    }
+
+    .icon-delete,
+    .icon-edit {
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .icon-edit {
+        color: #ffc107;
+    }
+
+    .icon-delete {
+        color: #dc3545;
+    }
+}

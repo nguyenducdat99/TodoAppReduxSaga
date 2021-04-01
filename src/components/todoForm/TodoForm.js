@@ -24,10 +24,10 @@ function TodoForm() {
                 </div>
                 <div className='todo-form__form-group'>
                         <label>
-                            <input type="radio" /> Kích hoạt
+                            <input type="radio" name="status"/> Kích hoạt
                         </label>&nbsp;&nbsp;
                         <label>
-                            <input type="radio"/> Ẩn
+                            <input type="radio" name='status'/> Ẩn
                         </label>
                 </div>
                 <button type='submit' className="todo-form__submit">Thêm</button>
