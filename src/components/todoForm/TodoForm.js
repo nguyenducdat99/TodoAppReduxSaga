@@ -1,19 +1,59 @@
 // import style library
+import { useState } from 'react';
 import './TodoForm.scss';
 
 function TodoForm(props) {
+    // declare state 
+    const [valueForm, setValueForm] = useState(
+        {
+            id: -1,
+            name: '',
+            price: 0,
+            status: true
+        }
+    )
 
     // get props;
-    const {onCloseForm} = props;
+    const {
+        onCloseForm,
+        onAddProduct
+    } = props;
 
     // handle when click icon exit
-    var onHandleClose = () => {
+    const onHandleClose = () => {
         onCloseForm();
     }
 
+    // handle when change value input
+    const onHandleChangeInput = event => {
+        const value = event.target.value;
+        const name = event.target.name;
+
+        setValueForm(
+            {
+                ...valueForm,
+                [name]: value
+            }
+        )
+    }
+
     //handle when form submit
-    var onHandleSubmit = event => {
+    const onHandleSubmit = event => {
         event.preventDefault();
+        onAddProduct(valueForm);
+        onResetForm();
+        onHandleClose();
+    }
+
+    // reset input 
+    const onResetForm = () => {
+        setValueForm({
+            ...valueForm,
+            id: -1,
+            name: '',
+            price: 0,
+            status: true
+        })
     }
 
     return (
@@ -30,6 +70,9 @@ function TodoForm(props) {
                         <input type='text'
                             className='todo-form__form-control'
                             placeholder="Tên sản phẩm"
+                            value={valueForm.name}
+                            name='name'
+                            onChange={onHandleChangeInput}
                         />
                 </div>
                 <div className='todo-form__form-group'>
@@ -37,15 +80,21 @@ function TodoForm(props) {
                             className='todo-form__form-control'
                             placeholder="Giá"
                             min={0}
+                            value={valueForm.price}
+                            name='price'
+                            onChange={onHandleChangeInput}
                         />
                 </div>
                 <div className='todo-form__form-group'>
-                        <label>
-                            <input type="radio" name="status"/> Kích hoạt
-                        </label>&nbsp;&nbsp;
-                        <label>
-                            <input type="radio" name='status'/> Ẩn
-                        </label>
+                        <select
+                            name='status'
+                            value={valueForm.status}
+                            className="todo-form__form-control"
+                            onChange={onHandleChangeInput}
+                        >
+                            <option value={true}>Kích hoạt</option>
+                            <option value={false}>Ẩn</option>
+                        </select>
                 </div>
                 <button type='submit' className="todo-form__submit">Thêm</button>
             </form>

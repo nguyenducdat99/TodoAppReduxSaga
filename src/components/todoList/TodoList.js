@@ -1,7 +1,14 @@
 // import style library
 import './TodoList.scss';
+import PropTypes from 'prop-types';
 
-function TodoList() {
+function TodoList(props) {
+
+    // get props
+    const {
+        todoItems
+    } = props;
+    
     return (
         <div className="todo-list">
             <input type='text' placeholder='Tìm kiếm nhanh...' />
@@ -17,18 +24,9 @@ function TodoList() {
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Tivi</td>
-                                <td>60.000</td>
-                                <td>
-                                    <span className="todo-list__status-enable">Kích hoạt</span>
-                                    <span className="todo-list__status-disable">Ẩn</span>
-                                </td>
-                                <td>
-                                    <i className="fa fa-pencil-square-o icon-edit" aria-hidden="true" title="Sửa"></i>&nbsp;
-                                    <i className="fa fa-trash-o icon-delete" aria-hidden="true" title="Xóa"></i>
-                                </td>
-                            </tr>
+                            {
+                                todoItems
+                            }
                         </tbody>
                     
                     </table>
@@ -36,4 +34,9 @@ function TodoList() {
         </div>
     )
 }
+
+TodoList.propTypes = {
+    todoItems: PropTypes.array
+}
+
 export default TodoList;

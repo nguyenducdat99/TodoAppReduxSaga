@@ -4,11 +4,13 @@ import './index.css';
 import AppContainer from './containers/AppContainer';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { store } from './utils/store';
+import { store } from './commons/store';
+
+const rooStore = store();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <Provider store={rooStore}>
       <AppContainer />
     </Provider>
   </React.StrictMode>,
