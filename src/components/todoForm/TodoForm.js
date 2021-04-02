@@ -1,13 +1,30 @@
 // import style library
 import './TodoForm.scss';
 
-function TodoForm() {
+function TodoForm(props) {
+
+    // get props;
+    const {onCloseForm} = props;
+
+    // handle when click icon exit
+    var onHandleClose = () => {
+        onCloseForm();
+    }
+
+    //handle when form submit
+    var onHandleSubmit = event => {
+        event.preventDefault();
+    }
+
     return (
         <div className="todo-form">
-            <form action="" method="">
+            <form action="" method="" onSubmit={onHandleSubmit}>
                 <div className='todo-form__form-group'>
                     <h3>Thêm sản phẩm</h3>
-                    <i className="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"
+                        title="Thoát"
+                        onClick={onHandleClose}
+                    ></i>
                 </div>
                 <div className='todo-form__form-group'>
                         <input type='text'

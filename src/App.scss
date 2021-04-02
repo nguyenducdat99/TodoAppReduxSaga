@@ -1,10 +1,23 @@
-h1 {
-    text-align: center;
-}
 .todo-app {
-    padding-top: 3%;
+    h1 {
+        text-align: center;
+        padding: 50px 0;
+    }
 	width: 90%;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+
+    &__add-btn {
+        margin-bottom: 15px;
+        padding: 0.375rem 0.75rem;
+        color: white;
+        background-color: #0078D4;
+        border: 1px solid #025a9c;
+        border-radius: 0.25rem;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+
+    }
 }
