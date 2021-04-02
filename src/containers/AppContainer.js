@@ -20,7 +20,8 @@ function AppContainer(props) {
         onDeleteProduct,
         productSelectVal,
         onResetSelectProduct,
-        onEditProduct
+        onEditProduct,
+        onUpdateStatus
     } = props;
     
     // return component todoForm
@@ -48,6 +49,18 @@ function AppContainer(props) {
         onSelectProduct(id);
     }
 
+    // hanlde when update status
+    const onHandleUpdate = product => {
+        const confirm = window.confirm("Bạn muốn thay đổi không?");
+
+        if (confirm) {
+
+            onUpdateStatus({
+                ...product,
+                status: product.status===true?false:true
+            })
+        }
+    }
 
     // return todoItem use in todo list
     const todoItems = productsVal.map(
@@ -57,11 +70,20 @@ function AppContainer(props) {
                     <td>{element.name}</td>
                     <td>{element.price} đ</td>
                     <td>
-                        {
-                            element.status?
-                            <span className="todo-list__status-enable">Kích hoạt</span>:
-                            <span className="todo-list__status-disable">Ẩn</span>
-                        }
+                        <span 
+                            className={
+                                element.status?
+                                "todo-list__status-enable":
+                                "todo-list__status-disable"
+                            }
+                            onClick={
+                                () => {
+                                    onHandleUpdate(element)
+                                }
+                            }
+                        >{
+                            element.status?"Kích hoạt":"ẩn"
+                        }</span>
                     </td>
                     <td>
                         <i className="fa fa-pencil-square-o icon-edit"
@@ -128,7 +150,8 @@ AppContainer.propTypes = {
     onDeleteProduct: PropTypes.func,
     productSelectVal: PropTypes.object,
     onResetSelectProduct: PropTypes.func,
-    onEditProduct: PropTypes.func
+    onEditProduct: PropTypes.func,
+    onUpdateStatus: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -164,6 +187,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onEditProduct: product => {
             dispatch(actions.onEditListen(product));
+        },
+        onUpdateStatus: product => {
+            dispatch(actions.onUpdateListen(product));
         }
     }
 }

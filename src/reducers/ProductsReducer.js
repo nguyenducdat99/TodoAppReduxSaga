@@ -39,11 +39,20 @@ function myReducer(state=initialState, action) {
             return [...state];
 
         case types.EDIT_SUCCESS:
-            index = findProduct(state,payload.id);
+            index = findProduct(state, payload.id);
             if (index !== -1) state[index] = {
                 ...state[index],
                 name: payload.name,
                 price: payload.price,
+                status: payload.status
+            }
+
+            return [...state];
+
+        case types.UPDATE_STATUS_SUCCESS:
+            index = findProduct(state, payload.id);
+            if (index !== -1) state[index] = {
+                ...state[index],
                 status: payload.status
             }
 

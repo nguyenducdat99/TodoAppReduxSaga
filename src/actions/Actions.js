@@ -109,3 +109,21 @@ export const onDeleteSuccess = id => {
         payload: id
     }
 }
+
+export const onUpdateListen = product => {
+    return {
+        type: types.UPDATE_STATUS_LISTEN,
+        payload: {
+            ...product
+        }
+    }
+}
+
+export const onUpdateSuccess = product => {
+    return {
+        type: types.UPDATE_STATUS_SUCCESS,
+        payload: {
+            ...product
+        }
+    }
+} 

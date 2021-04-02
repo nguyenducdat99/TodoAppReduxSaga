@@ -22,7 +22,7 @@ function* getProducts() {
     if (response.status===200) {
         yield put(actions.onFetchSuccess(response.data));
     } else {
-        console.log(response.statusText);
+        yield console.log(response.statusText);
     }
     
     yield put(actions.onTurnOffLoading());
@@ -43,7 +43,7 @@ function* addProduct(action) {
     if (response.status===201) {
         yield put(actions.onAddSuccess(response.data));
     }else{
-        console.log(response.statusText);
+        yield console.log(response.statusText);
     }
     yield put(actions.onTurnOffLoading());
 } 
@@ -58,7 +58,7 @@ function* selectProduct(action) {
         yield put(actions.onSelectSuccess(response.data));
         yield put(actions.onOpenForm());
     }else {
-        console.log(response.statusText);
+        yield console.log(response.statusText);
     }
 
     yield put(actions.onTurnOffLoading());
@@ -73,7 +73,7 @@ function* editProduct(action) {
     if (response.status===200) {
         yield put(actions.onEditSuccess(response.data));
     }else{
-        console.log(response.statusText);
+        yield console.log(response.statusText);
     }
 
     yield put(actions.onTurnOffLoading());
@@ -83,17 +83,31 @@ function* deleteProduct(action) {
     const payload = action.payload;
 
     yield put(actions.onTurnOnLoading());
-    const response = yield call(apiTask.deleteProduct,payload)
+    const response = yield call(apiTask.deleteProduct,payload);
 
     if (response.status===200) {
         yield put(actions.onDeleteSuccess(payload));
     }else{
-        console.log(response.statusText);
+        yield console.log(response.statusText);
     }
 
     yield put(actions.onTurnOffLoading());
 }
 
+function* updateStatus(action) {
+    const payload = action.payload;
+
+    yield put(actions.onTurnOnLoading());
+    const response = yield call(apiTask.editProduct,payload);
+
+    if (response.status ===200) {
+        yield put(actions.onUpdateSuccess(response.data));
+    }else{
+        yield console.log(response.statusText)
+    }
+
+    yield put(actions.onTurnOffLoading());
+}
 
 function* rootSagas() {
    yield takeEvery(types.FETCH_PRODUCTS, getProducts);
@@ -101,6 +115,7 @@ function* rootSagas() {
    yield takeEvery(types.SELECT_LISTEN, selectProduct);
    yield takeEvery(types.EDIT_LISTEN, editProduct);
    yield takeEvery(types.DELETE_LISTEN, deleteProduct);
+   yield takeEvery(types.UPDATE_STATUS_LISTEN, updateStatus);
 }
 
 export default rootSagas;
