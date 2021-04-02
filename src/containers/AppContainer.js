@@ -16,7 +16,8 @@ function AppContainer(props) {
         productsVal,
         onCloseForm,
         onAddProduct,
-        onSelectProduct
+        onSelectProduct,
+        onDeleteProduct
     } = props;
     
     // return component todoForm
@@ -43,7 +44,15 @@ function AppContainer(props) {
                     </td>
                     <td>
                         <i className="fa fa-pencil-square-o icon-edit" aria-hidden="true" title="Sửa"></i>&nbsp;
-                        <i className="fa fa-trash-o icon-delete" aria-hidden="true" title="Xóa"></i>
+                        <i className="fa fa-trash-o icon-delete" 
+                            aria-hidden="true" 
+                            title="Xóa"
+                            onClick={
+                                () => {
+                                    onDeleteProduct(element.id)
+                                }
+                            }
+                        ></i>
                     </td>
                 </tr>
             )
@@ -85,7 +94,8 @@ AppContainer.propTypes = {
     onFetchProducts: PropTypes.func,
     onCloseForm: PropTypes.func,
     onAddProduct: PropTypes.func,
-    onSelectProduct: PropTypes.func
+    onSelectProduct: PropTypes.func,
+    onDeleteProduct: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -111,6 +121,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onSelectProduct: product => {
             dispatch(actions.onSelectProduct(product));
+        },
+        onDeleteProduct: id => {
+            dispatch(actions.onDeleteProduct(id));
         }
     }
 }

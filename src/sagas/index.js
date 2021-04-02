@@ -50,14 +50,21 @@ function* addProduct(action) {
 function* deleteProduct(action) {
     const payload = action.payload;
     yield put(actions.onTurnOnLoading());
+    const response = yield call(apiTask.deleteProduct,payload)
 
-    yield console.log(payload);
+    if (response.status===200) {
+        yield put(actions.onDeleteSuccess(payload));
+    }else{
+        console.log(response.statusText);
+    }
+
     yield put(actions.onTurnOffLoading());
 }
 
 function* rootSagas() {
    yield takeEvery(types.FETCH_PRODUCTS, getProducts);
    yield takeEvery(types.ADD_LISTEN, addProduct);
+   yield takeEvery(types.DELETE_LISTEN, deleteProduct);
 }
 
 export default rootSagas;

@@ -7,12 +7,24 @@ const setting = (a, b) => {
     return 0;
 }
 
+const findProduct = (state, id) => {
+    let result = -1;
+
+    state.forEach((element,index) => {
+        if (element.id*1===id*1) result = index;
+    });
+
+    return result;
+}
+
 // declare initialState
 const initialState = [];
 
 function myReducer(state=initialState, action) {
     let type = action.type;
     let payload = action.payload;
+    let index = -1;
+
     state.sort(setting);
 
     switch (type) {
@@ -23,7 +35,12 @@ function myReducer(state=initialState, action) {
         case types.ADD_SUCCESS: 
             state = [payload].concat(state);
 
-            return [...state]
+            return [...state];
+        case types.DELETE_SUCCESS: 
+            index = findProduct(state,payload);
+            if (index !== -1) state.splice(index,1);
+
+            return [...state];
         default:
             return state;
     }
