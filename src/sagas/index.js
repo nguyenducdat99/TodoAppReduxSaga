@@ -29,6 +29,7 @@ function* getProducts() {
 }
 
 function* addProduct(action) {
+    
     const payload = action.payload;
     yield put(actions.onTurnOnLoading());
     const response = yield call(apiTask.addProduct,

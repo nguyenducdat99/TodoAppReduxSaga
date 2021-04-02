@@ -23,7 +23,7 @@ function App(props) {
 		onResetSelectProduct({
 			id: '',
             name: '',
-            price: 0,
+            price: '',
             status: true
 		})
 	}

@@ -5,7 +5,7 @@ import * as types from '../constants/ActionTypes';
 const initialState = {
     id: '',
     name: '',
-    price: 0,
+    price: '',
     status: true
 };
 

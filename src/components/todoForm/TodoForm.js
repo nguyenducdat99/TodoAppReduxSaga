@@ -6,13 +6,12 @@ function TodoForm(props) {
     // declare state 
     const [valueForm, setValueForm] = useState(
         {
-            id: -1,
+            id: '',
             name: '',
-            price: 0,
+            price: '',
             status: true
         }
     )
-
     // get props;
     const {
         onCloseForm,
@@ -38,12 +37,13 @@ function TodoForm(props) {
         },[productSelectVal]
     )
 
+
     // handle when click icon exit
     const onHandleClose = () => {
         onResetSelectProduct({
             id: '',
             name: '',
-            price: 0,
+            price: '',
             status: true
         });
         onCloseForm();
@@ -66,10 +66,19 @@ function TodoForm(props) {
     const onHandleSubmit = event => {
         event.preventDefault();
         
-        if (valueForm.id!==-1) {
-            onEditProduct(valueForm);
+        let confirm =   window.confirm(
+            "Sản phẩm: " + valueForm.name + 
+            "\nGiá: " + valueForm.price + 
+            "\nBạn có muốn lưu lại không?"
+        );
+        if (valueForm.id!=='') {
+            if (confirm) {
+                onEditProduct(valueForm);
+            }
         }else{
-            onAddProduct(valueForm);
+            if (confirm) {
+                onAddProduct(valueForm);
+            }
         }
 
         onResetForm();
@@ -82,7 +91,7 @@ function TodoForm(props) {
             ...valueForm,
             id: -1,
             name: '',
-            price: 0,
+            price: '',
             status: true
         })
     }
@@ -115,9 +124,9 @@ function TodoForm(props) {
                         <input type='number'
                             className='todo-form__form-control'
                             placeholder="Giá"
-                            min={0}
                             value={valueForm.price}
                             name='price'
+                            min={0}
                             onChange={onHandleChangeInput}
                             required
                         />
