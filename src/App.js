@@ -10,14 +10,26 @@ function App(props) {
 		onToggleForm, 
 		loadingVal,
 		todoForm,
-		todoList
+		todoList,
+		productSelectVal,
+		onResetSelectProduct
 	} = props;
 
 	// handle when click button
 	var onHandleButton = () => {
-		onToggleForm();
+		if (productSelectVal.id.trim() ===''){
+			return onToggleForm();
+		} 
+		onResetSelectProduct({
+			id: '',
+            name: '',
+            price: 0,
+            status: true
+		})
 	}
 
+
+	// return ui
 	return (
 		<>
 			{

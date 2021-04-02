@@ -1,5 +1,5 @@
 // import style library
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './TodoForm.scss';
 
 function TodoForm(props) {
@@ -16,11 +16,36 @@ function TodoForm(props) {
     // get props;
     const {
         onCloseForm,
-        onAddProduct
+        onAddProduct,
+        productSelectVal,
+        onResetSelectProduct,
+        onEditProduct
     } = props;
+
+    // load data for form
+    useEffect(
+        () => {
+                setValueForm(
+                    {
+                        ...valueForm,
+                        id: productSelectVal.id,
+                        name: productSelectVal.name,
+                        price: productSelectVal.price,
+                        status: productSelectVal.status
+                    }
+                )
+            // eslint-disable-next-line
+        },[productSelectVal]
+    )
 
     // handle when click icon exit
     const onHandleClose = () => {
+        onResetSelectProduct({
+            id: '',
+            name: '',
+            price: 0,
+            status: true
+        });
         onCloseForm();
     }
 
@@ -40,7 +65,13 @@ function TodoForm(props) {
     //handle when form submit
     const onHandleSubmit = event => {
         event.preventDefault();
-        onAddProduct(valueForm);
+        
+        if (valueForm.id!==-1) {
+            onEditProduct(valueForm);
+        }else{
+            onAddProduct(valueForm);
+        }
+
         onResetForm();
         onHandleClose();
     }
@@ -60,9 +91,13 @@ function TodoForm(props) {
         <div className="todo-form">
             <form action="" method="" onSubmit={onHandleSubmit}>
                 <div className='todo-form__form-group'>
-                    <h3>Thêm sản phẩm</h3>
+                    <h3>
+                        {
+                            productSelectVal.id.trim()!==''?'Sửa sản phẩm':'Thêm sản phẩm'
+                        }
+                    </h3>
                     <i className="fa fa-times" aria-hidden="true"
-                        title="Thoát"
+                        title="Thoát" 
                         onClick={onHandleClose}
                     ></i>
                 </div>
@@ -73,6 +108,7 @@ function TodoForm(props) {
                             value={valueForm.name}
                             name='name'
                             onChange={onHandleChangeInput}
+                            required
                         />
                 </div>
                 <div className='todo-form__form-group'>
@@ -83,6 +119,7 @@ function TodoForm(props) {
                             value={valueForm.price}
                             name='price'
                             onChange={onHandleChangeInput}
+                            required
                         />
                 </div>
                 <div className='todo-form__form-group'>
@@ -96,7 +133,7 @@ function TodoForm(props) {
                             <option value={false}>Ẩn</option>
                         </select>
                 </div>
-                <button type='submit' className="todo-form__submit">Thêm</button>
+                <button type='submit' className="todo-form__submit">Lưu lại</button>
             </form>
         </div>
     )

@@ -14,7 +14,9 @@ function myReducer(state=initialState, action) {
         case types.CLOSE_FORM:
 
             return false;
+        case types.OPEN_FORM:
 
+            return true;
         default:
             return state;
     }

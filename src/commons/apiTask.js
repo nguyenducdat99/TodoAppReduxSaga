@@ -12,6 +12,18 @@ export const addProduct = async data => {
     return response;
 }
 
+export const selectProduct = async id => {
+    const response = await apiConnect(('products/'+id),'GET',null);
+
+    return response;
+}
+
+export const editProduct = async data => {
+    const response = await apiConnect(('products/'+data.id), 'PUT', data);
+
+    return response;
+}
+
 export const deleteProduct = async id => {
     const response = await apiConnect(('products/'+id),'DELETE',null);
 

@@ -4,6 +4,7 @@ export const API_URL = 'https://60658d88b8fbbd00175668eb.mockapi.io/';
 
 // type for handle action form
 export const TOGGLE_FORM = 'TOGGLE_FORM';
+export const OPEN_FORM = 'OPEN_FORM';
 export const CLOSE_FORM = 'CLOSE_FORM';
 
 // type for handle loading
@@ -17,7 +18,11 @@ export const FETCH_SUCCESS = 'FETCH_SUCCES';
 export const ADD_LISTEN = 'ADD_LISTEN';
 export const ADD_SUCCESS = 'ADD_SUCCESS';
 
-export const SELECT_PRODUCT = 'SELECT_PRODUCT';
+export const SELECT_LISTEN = 'SELECT_LISTEN';
+export const SELECT_SUCCESS = 'SELECT_SUCCESS';
+
+export const EDIT_LISTEN = 'EDIT_LISTEN';
+export const EDIT_SUCCESS = 'EDIT_SUCCESS';
 
 export const DELETE_LISTEN = 'DELETE_LISTEN';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';

@@ -32,15 +32,29 @@ function myReducer(state=initialState, action) {
             state = [...payload.products]
 
             return [...state];
+
         case types.ADD_SUCCESS: 
             state = [payload].concat(state);
 
             return [...state];
+
+        case types.EDIT_SUCCESS:
+            index = findProduct(state,payload.id);
+            if (index !== -1) state[index] = {
+                ...state[index],
+                name: payload.name,
+                price: payload.price,
+                status: payload.status
+            }
+
+            return [...state];
+
         case types.DELETE_SUCCESS: 
             index = findProduct(state,payload);
             if (index !== -1) state.splice(index,1);
 
             return [...state];
+
         default:
             return state;
     }

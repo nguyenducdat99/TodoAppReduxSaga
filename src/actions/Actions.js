@@ -6,6 +6,11 @@ export const onToggle = () => {
         type: types.TOGGLE_FORM
     }
 }
+export const onOpenForm = () => {
+    return {
+        type: types.OPEN_FORM
+    }
+}
 export const oncloseForm = () => {
     return {
         type: types.CLOSE_FORM
@@ -57,15 +62,39 @@ export const onAddSuccess = product => {
     }
 }
 
-export const onSelectProduct = product => {
+export const onSelectListen = id => {
     return {
-        type: types.SELECT_PRODUCT,
+        type: types.SELECT_LISTEN,
+        payload: id
+    }
+}
+
+export const onSelectSuccess = product => {
+    return {
+        type: types.SELECT_SUCCESS,
         payload: {
             ...product
         }
     }
 }
 
+export const onEditListen = product => {
+    return {
+        type: types.EDIT_LISTEN,
+        payload: {
+            ...product
+        }
+    }
+}
+
+export const onEditSuccess = product => {
+    return {
+        type: types.EDIT_SUCCESS,
+        payload: {
+            ...product
+        }
+    }
+}
 
 export const onDeleteProduct = id => {
     return {

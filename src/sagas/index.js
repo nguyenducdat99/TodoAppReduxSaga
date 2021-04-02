@@ -47,8 +47,40 @@ function* addProduct(action) {
     yield put(actions.onTurnOffLoading());
 } 
 
+function* selectProduct(action) {
+    const payload = action.payload;
+    yield put(actions.onTurnOnLoading());
+
+    const response = yield call(apiTask.selectProduct, payload);
+
+    if (response.status === 200) {
+        yield put(actions.onSelectSuccess(response.data));
+        yield put(actions.onOpenForm());
+    }else {
+        console.log(response.statusText);
+    }
+
+    yield put(actions.onTurnOffLoading());
+}
+
+function* editProduct(action) {
+    const payload = action.payload;
+    yield put(actions.onTurnOnLoading());
+
+    const response = yield call(apiTask.editProduct,payload);
+
+    if (response.status===200) {
+        yield put(actions.onEditSuccess(response.data));
+    }else{
+        console.log(response.statusText);
+    }
+
+    yield put(actions.onTurnOffLoading());
+}
+
 function* deleteProduct(action) {
     const payload = action.payload;
+
     yield put(actions.onTurnOnLoading());
     const response = yield call(apiTask.deleteProduct,payload)
 
@@ -61,9 +93,12 @@ function* deleteProduct(action) {
     yield put(actions.onTurnOffLoading());
 }
 
+
 function* rootSagas() {
    yield takeEvery(types.FETCH_PRODUCTS, getProducts);
    yield takeEvery(types.ADD_LISTEN, addProduct);
+   yield takeEvery(types.SELECT_LISTEN, selectProduct);
+   yield takeEvery(types.EDIT_LISTEN, editProduct);
    yield takeEvery(types.DELETE_LISTEN, deleteProduct);
 }
 

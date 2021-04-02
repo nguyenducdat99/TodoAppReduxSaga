@@ -17,7 +17,10 @@ function AppContainer(props) {
         onCloseForm,
         onAddProduct,
         onSelectProduct,
-        onDeleteProduct
+        onDeleteProduct,
+        productSelectVal,
+        onResetSelectProduct,
+        onEditProduct
     } = props;
     
     // return component todoForm
@@ -25,8 +28,26 @@ function AppContainer(props) {
         return <TodoForm 
             onCloseForm={onCloseForm}
             onAddProduct={onAddProduct}
+            productSelectVal={productSelectVal}
+            onResetSelectProduct={onResetSelectProduct}
+            onEditProduct={onEditProduct}
         />
     }
+
+    // handle when delete product
+    const onHandleDelete = id => {
+        const confirm = window.confirm('Bạn muốn xóa chứ?');
+        
+        if (confirm) {
+            onDeleteProduct(id)
+        }
+    }
+
+    // handle when edit product
+    const onHandleEdit = id => {
+        onSelectProduct(id);
+    }
+
 
     // return todoItem use in todo list
     const todoItems = productsVal.map(
@@ -43,13 +64,21 @@ function AppContainer(props) {
                         }
                     </td>
                     <td>
-                        <i className="fa fa-pencil-square-o icon-edit" aria-hidden="true" title="Sửa"></i>&nbsp;
+                        <i className="fa fa-pencil-square-o icon-edit"
+                            aria-hidden="true" 
+                            title="Sửa"
+                            onClick={
+                                () => {
+                                    onHandleEdit(element.id)
+                                }
+                            }
+                        ></i>&nbsp;
                         <i className="fa fa-trash-o icon-delete" 
                             aria-hidden="true" 
                             title="Xóa"
                             onClick={
                                 () => {
-                                    onDeleteProduct(element.id)
+                                    onHandleDelete(element.id)
                                 }
                             }
                         ></i>
@@ -70,7 +99,6 @@ function AppContainer(props) {
     useEffect(
         () => {
             onFetchProducts();
-
             // eslint-disable-next-line
         },[]
     )
@@ -82,6 +110,8 @@ function AppContainer(props) {
             loadingVal={loadingVal}
             todoForm={todoForm}
             todoList={todoList}
+            productSelectVal={productSelectVal}
+            onResetSelectProduct={onResetSelectProduct}
         />
     )
 }
@@ -95,14 +125,18 @@ AppContainer.propTypes = {
     onCloseForm: PropTypes.func,
     onAddProduct: PropTypes.func,
     onSelectProduct: PropTypes.func,
-    onDeleteProduct: PropTypes.func
+    onDeleteProduct: PropTypes.func,
+    productSelectVal: PropTypes.object,
+    onResetSelectProduct: PropTypes.func,
+    onEditProduct: PropTypes.func
 }
 
 const mapStateToProps = state => {
     return {
         toggleVal: state.toggleForm,
         loadingVal: state.loading,
-        productsVal: state.products
+        productsVal: state.products,
+        productSelectVal: state.productSelect
     }
 }
 const mapDispatchToProps = (dispatch, props) => {
@@ -119,11 +153,17 @@ const mapDispatchToProps = (dispatch, props) => {
         onAddProduct: product => {
             dispatch(actions.onAddProduct(product));
         },
-        onSelectProduct: product => {
-            dispatch(actions.onSelectProduct(product));
+        onSelectProduct: id => {
+            dispatch(actions.onSelectListen(id));
         },
         onDeleteProduct: id => {
             dispatch(actions.onDeleteProduct(id));
+        },
+        onResetSelectProduct: productDefault => {
+            dispatch(actions.onSelectSuccess(productDefault));
+        },
+        onEditProduct: product => {
+            dispatch(actions.onEditListen(product));
         }
     }
 }
