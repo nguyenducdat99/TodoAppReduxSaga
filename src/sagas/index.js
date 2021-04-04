@@ -110,9 +110,13 @@ function* updateStatus(action) {
 }
 
 function* filterProduct(action) {
-    yield delay(500);
+    yield delay(600);
+    yield put(actions.onTurnOnLoading());
     const payload = action.payload;
     const response = yield call(apiTask.filterProduct,payload);
+
+    yield put(actions.onFIlterSuccess(response.data));
+    yield put(actions.onTurnOffLoading());
 }
 
 function* rootSagas() {

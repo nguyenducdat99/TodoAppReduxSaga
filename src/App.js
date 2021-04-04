@@ -53,7 +53,11 @@ function App(props) {
 						<button type='text'
 							className='todo-app__add-btn'	
 							onClick={onHandleButton}
-						>Thêm mới</button>
+						>Thêm mới</button>&nbsp;
+						<button type='text'
+							className='todo-app__add-btn'	
+							onClick={onHandleButton}
+						>Khôi phục</button>
 						{
 							todoList()
 						}

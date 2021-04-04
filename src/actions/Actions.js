@@ -139,7 +139,7 @@ export const onFilterListen = keyword => {
 
 export const onFIlterSuccess = data => {
     return {
-        types: types.FILTER_SUCCESS,
+        type: types.FILTER_SUCCESS,
         payload: {
             products: [...data]
         }

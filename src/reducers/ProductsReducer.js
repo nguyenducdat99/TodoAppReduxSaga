@@ -64,6 +64,10 @@ function myReducer(state=initialState, action) {
 
             return [...state];
 
+        case types.FILTER_SUCCESS:
+            state = [...payload.products];
+
+            return state;
         default:
             return state;
     }

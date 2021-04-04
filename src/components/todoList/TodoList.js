@@ -24,6 +24,8 @@ function TodoList(props) {
     useEffect(
         () => {
             if (keyword.trim() !== '') onFilterProduct(keyword);
+
+            //eslint-disable-next-line
         },[keyword]
     )
 

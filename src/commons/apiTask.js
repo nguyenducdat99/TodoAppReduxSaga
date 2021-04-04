@@ -33,5 +33,9 @@ export const deleteProduct = async id => {
 
 export const filterProduct = async (keyword = {}) => {
     let queryString = '';
-    if (Object.keys(keyword).length > 0) console.log(qs.stringify(keyword));
+    if (Object.keys(keyword).length > 0) queryString = qs.stringify(keyword);
+
+    const response = await apiConnect(('products?'+queryString), 'GET', null);
+
+    return response;
 }
