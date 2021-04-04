@@ -7,6 +7,10 @@ export const TOGGLE_FORM = 'TOGGLE_FORM';
 export const OPEN_FORM = 'OPEN_FORM';
 export const CLOSE_FORM = 'CLOSE_FORM';
 
+// type for handle display button recover
+export const DISPLAY_RECOVER = 'DISPLAY_RECOVER';
+export const HIDE_RECOVER = 'HIDE_RECOVER';
+
 // type for handle loading
 export const TURN_ON_LOADING = 'TURN_ON_LOADING';
 export const TURN_OFF_LOADING = 'TURN_OFF_LOADING';

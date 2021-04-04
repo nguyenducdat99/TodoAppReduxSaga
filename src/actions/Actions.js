@@ -17,6 +17,18 @@ export const oncloseForm = () => {
     }
 }
 
+// action handle button recover
+export const onDisplayRecover = () => {
+    return {
+        type: types.DISPLAY_RECOVER
+    }
+}
+export const onHideRecover = () => {
+    return {
+        type: types.HIDE_RECOVER
+    }
+}
+
 // action handle loading
 export const onTurnOnLoading = () => {
     return {

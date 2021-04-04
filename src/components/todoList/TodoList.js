@@ -11,7 +11,9 @@ function TodoList(props) {
     // get props
     const {
         todoItems,
-        onFilterProduct
+        onFilterProduct,
+        onFetchProducts,
+        recoverVal
     } = props;
     
     // handle when input keyword search
@@ -20,16 +22,28 @@ function TodoList(props) {
 
         setKeyword(value);
     }
-    
+    // load data 
     useEffect(
         () => {
-            if (keyword.trim() !== '') onFilterProduct(keyword);
-
+            if (keyword.trim() !== '') {
+                onFilterProduct(keyword);
+            }else{
+                onFetchProducts();
+            }
+            
             //eslint-disable-next-line
         },[keyword]
     )
-
-    return (
+        
+    useEffect(
+        // reset keword
+        () => { 
+            if(!recoverVal) setKeyword('');
+            // eslint-disable-next-line
+        },[recoverVal]
+    )
+    
+        return (
         <div className="todo-list">
             <input type='text'
                 placeholder='Tìm kiếm nhanh...' 

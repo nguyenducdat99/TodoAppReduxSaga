@@ -21,6 +21,7 @@ function* getProducts() {
 
     if (response.status===200) {
         yield put(actions.onFetchSuccess(response.data));
+        yield put(actions.onHideRecover());
     } else {
         yield console.log(response.statusText);
     }
@@ -115,7 +116,12 @@ function* filterProduct(action) {
     const payload = action.payload;
     const response = yield call(apiTask.filterProduct,payload);
 
-    yield put(actions.onFIlterSuccess(response.data));
+    if (response.status===200) {
+        yield put(actions.onFIlterSuccess(response.data));
+        yield put(actions.onDisplayRecover());
+    }else{
+        yield console.log(response.statusText);
+    }
     yield put(actions.onTurnOffLoading());
 }
 

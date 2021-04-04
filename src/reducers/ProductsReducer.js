@@ -25,17 +25,17 @@ function myReducer(state=initialState, action) {
     let payload = action.payload;
     let index = -1;
 
-    state.sort(setting);
-
     switch (type) {
         case types.FETCH_SUCCESS:
             state = [...payload.products]
 
+            state.sort(setting);
             return [...state];
 
         case types.ADD_SUCCESS: 
             state = [payload].concat(state);
 
+            state.sort(setting);
             return [...state];
 
         case types.EDIT_SUCCESS:
@@ -47,6 +47,7 @@ function myReducer(state=initialState, action) {
                 status: payload.status
             }
 
+            state.sort(setting);
             return [...state];
 
         case types.UPDATE_STATUS_SUCCESS:
@@ -56,17 +57,20 @@ function myReducer(state=initialState, action) {
                 status: payload.status
             }
 
+            state.sort(setting);
             return [...state];
 
         case types.DELETE_SUCCESS: 
             index = findProduct(state,payload);
             if (index !== -1) state.splice(index,1);
 
+            state.sort(setting);
             return [...state];
 
         case types.FILTER_SUCCESS:
             state = [...payload.products];
 
+            state.sort(setting);
             return state;
         default:
             return state;

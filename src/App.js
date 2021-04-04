@@ -12,11 +12,14 @@ function App(props) {
 		todoForm,
 		todoList,
 		productSelectVal,
-		onResetSelectProduct
+		onResetSelectProduct,
+		recoverVal,
+		onFetchProducts
 	} = props;
 
+
 	// handle when click button
-	var onHandleButton = () => {
+	const onHandleButton = () => {
 		if (productSelectVal.id.trim() ===''){
 			return onToggleForm();
 		} 
@@ -28,6 +31,10 @@ function App(props) {
 		})
 	}
 
+	// handle when click recover
+	const onHandleRecover = () => {
+		return onFetchProducts();
+	}
 
 	// return ui
 	return (
@@ -54,10 +61,15 @@ function App(props) {
 							className='todo-app__add-btn'	
 							onClick={onHandleButton}
 						>Thêm mới</button>&nbsp;
-						<button type='text'
+						{
+							recoverVal?
+							<button type='text'
 							className='todo-app__add-btn'	
-							onClick={onHandleButton}
-						>Khôi phục</button>
+								onClick={onHandleRecover}
+							>Khôi phục</button>:
+							''
+						}
+						
 						{
 							todoList()
 						}
