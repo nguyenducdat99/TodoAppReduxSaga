@@ -1,4 +1,5 @@
 import apiConnect from './apiConnect';
+import qs from 'query-string';
 
 export const getProduct = async () => {
     const response = await apiConnect('products',"GET",null);
@@ -28,4 +29,9 @@ export const deleteProduct = async id => {
     const response = await apiConnect(('products/'+id),'DELETE',null);
 
     return response;
+}
+
+export const filterProduct = async (keyword = {}) => {
+    let queryString = '';
+    if (Object.keys(keyword).length > 0) console.log(qs.stringify(keyword));
 }

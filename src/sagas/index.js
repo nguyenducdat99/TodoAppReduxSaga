@@ -1,4 +1,4 @@
-import { call,  put, takeEvery } from 'redux-saga/effects';
+import { call,  delay,  put, takeEvery, takeLatest } from 'redux-saga/effects';
 import * as types from '../constants/ActionTypes'
 import * as apiTask from '../commons/apiTask';
 import * as actions from '../actions/Actions';
@@ -109,6 +109,12 @@ function* updateStatus(action) {
     yield put(actions.onTurnOffLoading());
 }
 
+function* filterProduct(action) {
+    yield delay(500);
+    const payload = action.payload;
+    const response = yield call(apiTask.filterProduct,payload);
+}
+
 function* rootSagas() {
    yield takeEvery(types.FETCH_PRODUCTS, getProducts);
    yield takeEvery(types.ADD_LISTEN, addProduct);
@@ -116,6 +122,7 @@ function* rootSagas() {
    yield takeEvery(types.EDIT_LISTEN, editProduct);
    yield takeEvery(types.DELETE_LISTEN, deleteProduct);
    yield takeEvery(types.UPDATE_STATUS_LISTEN, updateStatus);
+   yield takeLatest(types.FILTER_LISTEN, filterProduct);
 }
 
 export default rootSagas;

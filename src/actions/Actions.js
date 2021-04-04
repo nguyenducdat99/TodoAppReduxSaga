@@ -127,3 +127,21 @@ export const onUpdateSuccess = product => {
         }
     }
 } 
+
+export const onFilterListen = keyword => {
+    return {
+        type: types.FILTER_LISTEN,
+        payload: {
+            filter: keyword
+        }
+    }
+}
+
+export const onFIlterSuccess = data => {
+    return {
+        types: types.FILTER_SUCCESS,
+        payload: {
+            products: [...data]
+        }
+    }
+}

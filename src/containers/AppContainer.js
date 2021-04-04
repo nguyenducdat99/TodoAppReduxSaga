@@ -21,7 +21,8 @@ function AppContainer(props) {
         productSelectVal,
         onResetSelectProduct,
         onEditProduct,
-        onUpdateStatus
+        onUpdateStatus,
+        onFilterProduct
     } = props;
     
     // return component todoForm
@@ -114,6 +115,7 @@ function AppContainer(props) {
     const todoList = () => {
         return <TodoList 
             todoItems={todoItems}
+            onFilterProduct={onFilterProduct}
         />
     }
 
@@ -151,7 +153,8 @@ AppContainer.propTypes = {
     productSelectVal: PropTypes.object,
     onResetSelectProduct: PropTypes.func,
     onEditProduct: PropTypes.func,
-    onUpdateStatus: PropTypes.func
+    onUpdateStatus: PropTypes.func,
+    onFilterProduct: PropTypes.func
 }
 
 const mapStateToProps = state => {
@@ -190,6 +193,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         onUpdateStatus: product => {
             dispatch(actions.onUpdateListen(product));
+        },
+        onFilterProduct: keyword => {
+            dispatch(actions.onFilterListen(keyword));
         }
     }
 }
