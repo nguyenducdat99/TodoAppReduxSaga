@@ -66,18 +66,24 @@ function TodoForm(props) {
     const onHandleSubmit = event => {
         event.preventDefault();
         
+        let valueFormCopy = {
+            ...valueForm,
+            status: (valueForm.status+'')==='true'?true:false
+        }
+        
+        console.log(valueFormCopy);
         let confirm =   window.confirm(
-            "Sản phẩm: " + valueForm.name + 
-            "\nGiá: " + valueForm.price + 
+            "Sản phẩm: " + valueFormCopy.name + 
+            "\nGiá: " + valueFormCopy.price + 
             "\nBạn có muốn lưu lại không?"
         );
-        if (valueForm.id!=='') {
+        if (valueFormCopy.id!=='') {
             if (confirm) {
-                onEditProduct(valueForm);
+                onEditProduct(valueFormCopy);
             }
         }else{
             if (confirm) {
-                onAddProduct(valueForm);
+                onAddProduct(valueFormCopy);
             }
         }
 
