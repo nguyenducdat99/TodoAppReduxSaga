@@ -71,7 +71,6 @@ function TodoForm(props) {
             status: (valueForm.status+'')==='true'?true:false
         }
         
-        console.log(valueFormCopy);
         let confirm =   window.confirm(
             "Sản phẩm: " + valueFormCopy.name + 
             "\nGiá: " + valueFormCopy.price + 

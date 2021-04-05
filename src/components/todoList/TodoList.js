@@ -22,6 +22,11 @@ function TodoList(props) {
 
         setKeyword(value);
     }
+
+    const onHandleSelect = event => {
+        event.target.select();
+    }
+
     // load data 
     useEffect(
         () => {
@@ -49,6 +54,7 @@ function TodoList(props) {
                 placeholder='Tìm kiếm nhanh...' 
                 value={keyword}
                 onChange={onHandleFilter}
+                onClick={onHandleSelect}
             />
             <div className="todo-list__list-item">
                     <table>
